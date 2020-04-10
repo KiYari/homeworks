@@ -1,0 +1,153 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.nav {
+  background-color: #adad85;
+  padding-left: 5%;
+  color: #6b6b47;
+}
+
+.nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav > ul{
+  display: inline-block;
+}
+
+.nav a {
+  text-decoration: none;
+}
+
+.nav > ul > li {
+  background-color: #adad85;
+  font-size: 250%;
+  font-family: fantasy;
+}
+
+.nav li ul {
+  padding: 10px;
+  background-color: #adad85;
+  color: #6b6b47;
+  position: absolute;
+  min-width: 150px;
+  display: none;
+  font-size: 80%;
+  border: 1px solid #000000;
+}
+
+.nav li > ul li a{
+  padding: 10px;
+  text-transform: none;
+  color: #6b6b47;
+}
+
+.nav li > ul li ul {
+  position: absolute;
+  right: -170px;
+  top: -11px;
+}
+.nav > ul ul li {
+  position: relative;
+  padding-top: 10px;
+  border-bottom: 1px solid #000000;
+}
+
+.nav li:hover > ul{
+  display: block;
+}
+
+.center {
+  width: 35%;
+  float: left;
+  margin: 3%;
+  padding: 2%;
+}
+
+.center iframe{
+  vertical-align: center;
+  border-radius: 20px;
+  width: 100%;
+  padding: 10px;
+}
+
+.center .title {
+  display: none;
+}
+
+.left-sb {
+  float: left;
+  float: left;
+  width: 15%;
+  margin-top: 5%;
+  margin-left: 5%;
+  padding: 5px;
+}
+
+.left-sb img:hover {
+  background-color: white;
+  border-radius: 60px;
+
+}
+
+.left-sb img {
+  max-height: 90px;
+  height: 100%;
+}
+
+.right-sb {
+  float: right;
+  width: 25%;
+  margin-top: 5%;
+  margin-bottom: 9%;
+}
+
+.right-sb img {
+  border-radius: 20px;
+  max-width: 100%;
+  width: auto;
+}
+
+.footer {
+  padding-top: 20px;
+  text-align: right;
+  background-color: #adad85;
+  clear: both;
+  font-size: 36px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+}
+
+body {
+  background-color: #c0c0c0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+@media print {
+  .nav {
+    display: none;
+  }
+  .left-sb {
+    display: none;
+  }
+  .right-sb {
+    display: none;
+  }
+  .center iframe {
+    display: none;
+  }
+  .center .title {
+    display: inline;
+  }
+}

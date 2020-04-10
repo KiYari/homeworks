@@ -123,6 +123,7 @@ body {
   color: #5c5c3d;
   padding-left: 10%;
   padding-right: 10%;
+  font-size: 40px;
 }
 
 .nav li {
@@ -158,12 +159,16 @@ body {
   margin-left: 32px;
 }
 
+.center .title {
+  display: none;
+}
+
 .left-sb {
   float: left;
   float: left;
   width: 15%;
   margin-top: 5%;
-  margin-left: 5%;
+  margin-left: 9%;
   padding: 5px;
 }
 
@@ -211,4 +216,27 @@ body {
 html,
 body {
   height: 100%;
+}
+
+@media print {
+  .main img{
+    display: none;
+  }
+  .left-sb {
+    display: none;
+  }
+  .right-sb {
+    display: none;
+  }
+  .center img {
+    display: none;
+  }
+  .center .title {
+    display: inline;
+    font-size: 30px;
+    text-align: center;
+  }
+  .nav {
+    display: none;
+  }
 }

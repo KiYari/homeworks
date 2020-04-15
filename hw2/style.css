@@ -211,10 +211,10 @@ body {
 
 body {
   background-color: #c0c0c0;
+  height: 100%;
 }
 
-html,
-body {
+html {
   height: 100%;
 }
 
@@ -233,8 +233,7 @@ body {
   }
   .center .title {
     display: inline;
-    font-size: 30px;
-    text-align: center;
+    font-size: 20px;
   }
   .nav {
     display: none;

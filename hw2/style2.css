@@ -76,11 +76,15 @@
   margin-left: 26%;
 }
 
+.center .title {
+  display: none;
+}
+
 .left-sb {
   float: left;
   float: left;
   margin-top: 5%;
-  margin-left: 5%;
+  margin-left: 9%;
   padding: 5px;
 }
 
@@ -123,9 +127,31 @@
 
 body {
   background-color: #c0c0c0;
+  height: 100%;
 }
 
-html,
-body {
+html {
   height: 100%;
+}
+
+@media print {
+  .main img{
+    display: none;
+  }
+  .left-sb {
+    display: none;
+  }
+  .right-sb {
+    display: none;
+  }
+  .center img {
+    display: none;
+  }
+  .center .title {
+    display: inline;
+    font-size: 20px;
+  }
+  .nav {
+    display: none;
+  }
 }

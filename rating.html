@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+     shrink-to-fit=no">
+    <link rel="stylesheet" href="../bootstrap-4.4.1-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <title>Chess World</title>
+  </head>
+
+  <body class="bg-dark">
+
+    <nav class="navbar navbar-expand-lg navbar-light  bg-light">
+      <a href="#" class="navbar-brand">
+        <span clss="brand-icon"><img src="chess.png" alt="icon"
+          width="40" height="40">
+      </a>
+      <button class="navbar-toggler collapsed" type="button"
+       data-toggle="collapse" data-target="#navbarCollapse"
+       aria-controls="navbarCollapse" aria-expanded="false"
+       aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse show" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link"><i class="fas fa-home"></i>Home</a>
+          </li>
+          <li class="nav-item active">
+            <a href="rating.html" class="nav-link"><i class="fas fa-th-list">
+            </i>Player`s rating</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown" id="navDropdown" role="button"
+              data-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-link"></i>Links</a>
+              <div class="dropdown-menu" aria-labelledby="navDropdown">
+
+                <ul class="dropright">
+                  <li><a id="nav1Dropdown" class="dropdown-item" href="#">
+                    Play Chess</a>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item"
+                          href="https://www.chess.com/play/computer"
+                          target="_blank">Chess.com</a></li>
+                        <li><div class="dropdown-divider"></div></li>
+                        <li><a class="dropdown-item"
+                          href="http://megachess.net/playchess_online"
+                           target="_blank">Megachess.net</a></li>
+                      </ul>
+                  </li>
+                  <li><div class="dropdown-divider "></div></li>
+                  <li><a id="nav2Dropdown" class="dropdown-item" href="#">
+                    Study Chess</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item"
+                        href="https://www.ichess.net/blog/best-chess-study-techniques/"
+                         target="_blank">
+                        iChess.net</a></li>
+                      <li><div class="dropdown-divider"></div></li>
+                      <li><a class="dropdown-item" href="https://chessfox.com/chess-improvement-study-plan/"
+                        target="_blank">Chessfox.com</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+          </li>
+          <li>
+            <div class="input-group-append">
+              <button type="button" class="btn btn-outline-secondary"
+              data-toggle="modal"
+              data-target="#exampleModal">
+                Подписаться на уведомления
+              </button>
+            </div>
+                <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">
+                        Подпишись на уведомления
+                      </h5>
+                      <button type="button" class="close" data-dismiss="modal"
+                       aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                  <div class="modal-body">
+                    ...
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                    data-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-primary">
+                      Подписаться</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </nav>
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">
+          Player`s Rating</li>
+      </ol>
+    </nav>
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="april-tab" data-toggle="tab"
+        href="#april" role="tab" aria-controls="home" aria-selected="true">
+        Топ 10 за Апрель 2020 года</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="year-tab" data-toggle="tab"
+        href="#year-time" role="tab" aria-controls="contact"
+        aria-selected="false">Топ 10 за 2020 год</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="all-time-tab" data-toggle="tab"
+        href="#all-time" role="tab" aria-controls="contact"
+        aria-selected="false">Топ 10 за все время</a>
+      </li>
+    </ul>
+
+      <main role="main">
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="april" role="tabpanel"
+            aria-labelledby="april-tab"><table class="table table-responsive-lg
+            table-hover table-dark table-sm" id="month">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Имя</th>
+                  <th scope="col">Гражданство</th>
+                  <th scope="col">Рейтинг</th>
+                  <th scope="col">Год рождения</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Carlsen, Magnus<span class="badge badge-secondary">
+                    Гроссмейстер
+                    </span></td>
+                  <td><img src="https://ratings.fide.com/svg/NOR.svg">NOR</td>
+                  <td>2863</td>
+                  <td>1990</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Caruano, Fabiano<span class="badge badge-secondary">
+                    Гроссмейстер
+                    </span></td>
+                  <td><img src="https://ratings.fide.com/svg/USA.svg">USA</td>
+                  <td>2835</td>
+                  <td>1992</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Ding, Liren<span class="badge badge-secondary">
+                    Гроссмейстер
+                    </span></td>
+                  <td><img src="https://ratings.fide.com/svg/CHN.svg">CHN</td>
+                  <td>2791</td>
+                  <td>1992</td>
+                </tr>
+                <tr>
+                  <th scope="row">4</th>
+                  <td>Nepomniachtchi, Ian<span class="badge badge-secondary">
+                    Гроссмейстер</span></td>
+                  <td><img src="https://ratings.fide.com/svg/RUS.svg">RUS</td>
+                  <td>2784</td>
+                  <td>1990</td>
+                </tr>
+                <tr>
+                  <th scope="row">5</th>
+                  <td>Vachier-Lagrave, Maxime<span
+                    class="badge badge-secondary">
+                    Гроссмейстер</span></td>
+                  <td><img src="https://ratings.fide.com/svg/FRA.svg">FRA</td>
+                  <td>2778</td>
+                  <td>1990</td>
+                </tr>
+                <tr>
+                  <th scope="row">6</th>
+                  <td>Grischuk, Alexander<span class="badge badge-secondary">
+                    Гроссмейстер</span></td>
+                  <td><img src="https://ratings.fide.com/svg/RUS.svg">RUS</td>
+                  <td>2777</td>
+                  <td>1983</td>
+                </tr>
+                <tr>
+                  <th scope="row">7</th>
+                  <td>Aronian, Levonr<span class="badge badge-secondary">
+                    Гроссмейстер</span></td>
+                  <td><img src="https://ratings.fide.com/svg/ARM.svg">ARM</td>
+                  <td>2773</td>
+                  <td>1982</td>
+                </tr>
+                <tr>
+                  <th scope="row">8</th>
+                  <td>So, Wesleyr<span class="badge badge-secondary">
+                    Гроссмейстер</span></td>
+                  <td><img src="https://ratings.fide.com/svg/USA.svg">USA</td>
+                  <td>2770</td>
+                  <td>1993</td>
+                </tr>
+                <tr>
+                  <th scope="row">9</th>
+                  <td>Radjabov, Teimourr<span class="badge badge-secondary">
+                    Гроссмейстер</span></td>
+                  <td><img src="https://ratings.fide.com/svg/AZE.svg">AZE</td>
+                  <td>2765</td>
+                  <td>1987</td>
+                </tr>
+                <tr>
+                  <th scope="row">10</th>
+                  <td>Giri, Anishr<span class="badge badge-secondary">
+                    Гроссмейстер</span></td>
+                  <td><img src="https://ratings.fide.com/svg/NED.svg">NED</td>
+                  <td>2764</td>
+                  <td>1994</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="year-time" role="tabpanel"
+            aria-labelledby="year-tab">
+            <table class="table table-responsive-lg
+             table-hover table-dark" id="month">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Гражданство</th>
+                    <th scope="col">Рейтинг</th>
+                    <th scope="col">Год рождения</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Carlsen, Magnus<span class="badge badge-secondary">
+                      Гроссмейстер
+                      </span></td>
+                    <td><img src="https://ratings.fide.com/svg/NOR.svg">NOR</td>
+                    <td>2863</td>
+                    <td>1990</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Caruano, Fabiano<span class="badge badge-secondary">
+                      Гроссмейстер
+                      </span></td>
+                    <td><img src="https://ratings.fide.com/svg/USA.svg">USA</td>
+                    <td>2835</td>
+                    <td>1992</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Ding, Liren<span class="badge badge-secondary">
+                      Гроссмейстер
+                      </span></td>
+                    <td><img src="https://ratings.fide.com/svg/CHN.svg">CHN</td>
+                    <td>2791</td>
+                    <td>1992</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">4</th>
+                    <td>Nepomniachtchi, Ian<span class="badge badge-secondary">
+                      Гроссмейстер</span></td>
+                    <td><img src="https://ratings.fide.com/svg/RUS.svg">RUS</td>
+                    <td>2784</td>
+                    <td>1990</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">5</th>
+                    <td>Vachier-Lagrave, Maxime<span
+                      class="badge badge-secondary">
+                      Гроссмейстер</span></td>
+                    <td><img src="https://ratings.fide.com/svg/FRA.svg">FRA</td>
+                    <td>2778</td>
+                    <td>1990</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">6</th>
+                    <td>Grischuk, Alexander<span class="badge badge-secondary">
+                      Гроссмейстер</span></td>
+                    <td><img src="https://ratings.fide.com/svg/RUS.svg">RUS</td>
+                    <td>2777</td>
+                    <td>1983</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">7</th>
+                    <td>Aronian, Levonr<span class="badge badge-secondary">
+                      Гроссмейстер</span></td>
+                    <td><img src="https://ratings.fide.com/svg/ARM.svg">ARM</td>
+                    <td>2773</td>
+                    <td>1982</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">8</th>
+                    <td>So, Wesleyr<span class="badge badge-secondary">
+                      Гроссмейстер</span></td>
+                    <td><img src="https://ratings.fide.com/svg/USA.svg">USA</td>
+                    <td>2770</td>
+                    <td>1993</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">9</th>
+                    <td>Radjabov, Teimourr<span class="badge badge-secondary">
+                      Гроссмейстер</span></td>
+                    <td><img src="https://ratings.fide.com/svg/AZE.svg">AZE</td>
+                    <td>2765</td>
+                    <td>1987</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">10</th>
+                    <td>Giri, Anishr<span class="badge badge-secondary">
+                      Гроссмейстер</span></td>
+                    <td><img src="https://ratings.fide.com/svg/NED.svg">NED</td>
+                    <td>2764</td>
+                    <td>1994</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+          <div class="tab-pane fade" id="all-time" role="tabpanel"
+            aria-labelledby="all-time-tab"></table>
+            <table class="table table-responsive-lg table-borderless table-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Имя</th>
+                  <th scope="col">Гражданство</th>
+                  <th scope="col">Рейтинг</th>
+                  <th scope="col">Лучший год</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Magnus Carlsenr<span class="badge badge-secondary">
+                    Гроссмейстер</span></td>
+                  <td><img src="https://ratings.fide.com/svg/NOR.svg">NOR</td>
+                  <td>2882</td>
+                  <td>2014</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Garry Kasparovr<span class="badge badge-secondary">
+                    Гроссмейстер</span></td>
+                  <td><img src="https://ratings.fide.com/svg/RUS.svg">RUS</td>
+                  <td>2851</td>
+                  <td>1999</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Fabiano Caruanar<span class="badge badge-secondary">
+                    Гроссмейстер</span></td>
+                  <td><img src="https://ratings.fide.com/svg/USA.svg">USA</td>
+                  <td>2844</td>
+                  <td>2014</td>
+                </tr>
+                <tr>
+                  <th scope="row">4</th>
+                  <td>Levon Aronianr<span class="badge badge-secondary">
+                    Гроссмейстер</span></td>
+                  <td><img src="https://ratings.fide.com/svg/ARM.svg">ARM</td>
+                  <td>2830</td>
+                  <td>2014</td>
+                </tr>
+                <tr>
+                  <th scope="row">5</th>
+                  <td>Wesley Sor<span class="badge badge-secondary">
+                    Гроссмейстер</span></td>
+                  <td><img src="https://ratings.fide.com/svg/USA.svg">USA</td>
+                  <td>2822</td>
+                  <td>2017</td>
+                </tr>
+                <tr>
+                  <th scope="row">6</th>
+                  <td>Shakhriyar Mamedyarovr<span class="badge badge-secondary">
+                    Гроссмейстер</span></td>
+                  <td><img src="https://ratings.fide.com/svg/AZE.svg">AZE</td>
+                  <td>2820</td>
+                  <td>2018</td>
+                </tr>
+                <tr>
+                  <th scope="row">7</th>
+                  <td>Maxime Vachier-Lagraver<span class="badge badge-secondary">
+                    Гроссмейстер</span></td>
+                  <td><img src="https://ratings.fide.com/svg/FRA.svg">FRA</td>
+                  <td>2819</td>
+                  <td>2016</td>
+                </tr>
+                <tr>
+                  <th scope="row">8</th>
+                  <td>Viswanathan Anand</td>
+                  <td><img src="https://ratings.fide.com/svg/IND.svg">IND</td>
+                  <td>2817</td>
+                  <td>2011</td>
+                </tr>
+                <tr>
+                  <th scope="row">9</th>
+                  <td>Vladimir Kramnikr<span class="badge badge-secondary">
+                    Гроссмейстер</span></td>
+                  <td><img src="https://ratings.fide.com/svg/RUS.svg">RUS</td>
+                  <td>2817</td>
+                  <td>2016</td>
+                </tr>
+                <tr>
+                  <th scope="row">10</th>
+                  <td>Veselin Topalovr<span class="badge badge-secondary">
+                    Гроссмейстер</span></td>
+                  <td><img src="https://ratings.fide.com/svg/BUL.svg">BUL</td>
+                  <td>2816</td>
+                  <td>2015</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="container">
+      <p class="float-left"><a href="#">Back to top</a></p>
+      <p class="float-right text-white">© 2020 Karim Idrisov</p>
+    </footer>
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+     crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+     crossorigin="anonymous"></script>
+    <script src="../bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+    <head>  <meta charset="utf-8">
+        <title>JS</title></head>
+<body>
+    <div id="5.1">
+        <h1>5.1</h1>
+        <button id='btn'>Вывести список</button>
+    </div>
+
+
+    <h1>5.2</h1>
+    <button id='btn2' onclick="CheckNodes(document.documentElement)">Вывести информацию о детях(childrens) в консоль</button>
+    <script type="text/javascript">
+
+
+
+        document.getElementById('btn').addEventListener('click', CreateList);
+
+          let list = [
+          {
+            text: 'Животные',
+            childs: [
+            {
+              text: 'Млекопитающие',
+              childs: ['Коровы', 'Ослы', 'Собаки', 'Тигры']
+            },
+            {
+              text: 'Другие',
+              childs: ['Змеи', 'Птицы', 'Ящерицы']
+            }
+            ]
+          },
+          {
+            text: 'Рыбы',
+            childs: [
+            {
+              text: 'Аквариумные',
+              childs: ['Гуппи', 'Скалярии']
+            },
+            {
+              text: 'Морские',
+              childs: ['Морская форель']
+            }
+            ]
+          }
+        ];
+
+          function CreateList() {
+              let div = document.getElementById('5.1');
+              // Главный список
+
+              let ul = document.createElement('ul');
+              div.appendChild(ul);
+              // Первый подсписок
+              let li = document.createElement('li');
+              li.innerHTML = list[0].text;
+              ul.appendChild(li);
+
+              // Подсписок
+              let ul1_2 = document.createElement('ul');
+              ul1_2.setAttribute('type', "circle");
+              li.appendChild(ul1_2);
+
+
+              for (let i = 0; i < list[0].childs.length; i++) {
+                  let li2 = document.createElement('li');
+                  li2.innerHTML = list[0].childs[i].text;
+                  ul1_2.appendChild(li2);
+                  let ul2_1 = document.createElement('ul');
+                  ul2_1.setAttribute('type', 'square');
+                  for (let j = 0; j < list[0].childs[i].childs.length; j++) {
+                      let li2_1 = document.createElement('li');
+                      li2_1.innerHTML = list[0].childs[i].childs[j];
+                      ul2_1.appendChild(li2_1);
+                  }
+                  li2.appendChild(ul2_1);
+              }
+              // Второй подсписок
+              let li2 = document.createElement('li');
+              li2.innerHTML = list[1].text;
+              ul.appendChild(li2);
+
+              let ul2_2 = document.createElement('ul');
+              ul2_2.setAttribute('type', "circle");
+              li2.appendChild(ul2_2);
+
+              for (let i = 0; i < list[1].childs.length; i++) {
+                  let li2 = document.createElement('li');
+                  li2.innerHTML = list[1].childs[i].text;
+                  ul2_2.appendChild(li2);
+                  let ul2_1 = document.createElement('ul');
+                  ul2_1.setAttribute('type', 'square');
+                  for (let j = 0; j < list[1].childs[i].childs.length; j++) {
+                      let li2_1 = document.createElement('li');
+                      li2_1.innerHTML = list[1].childs[i].childs[j];
+                      ul2_1.appendChild(li2_1);
+                  }
+                  li2.appendChild(ul2_1);
+              }
+              document.getElementById('btn').remove();
+          }
+
+          // 5.2 task
+
+        function CheckNodes(node) {
+            if (node && 1 === node.nodeType) {
+                let child = node.firstChild;
+                while (child) {
+                    if (1 === child.nodeType) {
+                        console.log('Имя элемента ' + child.tagName);
+                        console.log('Содержание элемента ' + child.innerText);
+                        CheckNodes(child);
+                    }
+                    child = child.nextSibling;
+                }
+            }
+        }
+
+  </script>
+</body>
+</html>

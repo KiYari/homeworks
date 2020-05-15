@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>JS 5.3</title>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    </head>
+
+    <body>
+
+    <script>
+
+        let list = [
+            {
+                text: 'Животные',
+                childs: [
+                    {
+                        text: 'Млекопитающие',
+                        childs: ['Коровы', 'Ослы', 'Собаки', 'Тигры']
+                    },
+                    {
+                        text: 'Другие',
+                        childs: ['Змеи', 'Птицы', 'Ящерицы']
+                    }
+                ]
+            },
+            {
+                text: 'Рыбы',
+                childs: [
+                    {
+                        text: 'Аквариумные',
+                        childs: ['Гуппи', 'Скалярии']
+                    },
+                    {
+                        text: 'Морские',
+                        childs: ['Морская форель']
+                    }
+                ]
+            }
+        ];
+
+        function CreateList() {
+
+            $("#main").append("<ul></ul>");
+            let li1 = $("<li id='list1'></li>").text(list[0].text).attr('value', list[0].text);
+            let li2 = $("<li id='list2'></li>").text(list[1].text).attr('value', list[1].text);
+            $('ul').append(li1, li2);
+            $('li').append("<ul type='circle'></ul>");
+
+            let li1_1 = $("<li></li>").text(list[0].childs[0].text).attr('value', list[0].childs[0].text);
+            let li1_2 = $("<li></li>").text(list[0].childs[1].text).attr('value', list[0].childs[1].text);
+            $("#list1 > ul").append(li1_1, li1_2);
+
+            let ul1 = $("<ul type='square' id='ul1'></ul>");
+            let ul2 = $("<ul type='square' id='ul2'></ul>");
+            $("#list1 > ul > li").eq(0).append(ul1);
+            $("#list1 > ul > li").eq(1).append(ul2);
+
+            for (let i = 0; i < list[0].childs[0].childs.length; i++) {
+                let li = $("<li></li>").text(list[0].childs[0].childs[i]).attr('value', list[0].childs[0].childs[i]);
+                $("#ul1").append(li);
+            }
+
+            for (let i = 0; i < list[0].childs[1].childs.length; i++) {
+                let li = $("<li></li>").text(list[0].childs[1].childs[i]).attr('value', list[0].childs[1].childs[i]);
+                $("#ul2").append(li);
+            }
+
+            let li2_1 = $("<li></li>").text(list[1].childs[0].text).attr('value', list[1].childs[0].text);
+            let li2_2 = $("<li></li>").text(list[1].childs[1].text).attr('value', list[1].childs[1].text);
+            $("#list2 > ul").append(li2_1, li2_2);
+
+            let ul3 = $("<ul type='square' id='ul3'></ul>");
+            let ul4 = $("<ul type='square' id='ul4'></ul>");
+            $("#list2 > ul > li").eq(0).append(ul3);
+            $("#list2 > ul > li").eq(1).append(ul4);
+
+            for (let i = 0; i < list[1].childs[0].childs.length; i++) {
+                let li = $("<li></li>").text(list[1].childs[0].childs[i]).attr('value', list[1].childs[0].childs[i]);
+                $("#ul3").append(li);
+            }
+
+            for (let i = 0; i < list[1].childs[1].childs.length; i++) {
+                let li = $("<li></li>").text(list[1].childs[1].childs[i]).attr('value', list[1].childs[0].childs[i]);
+                $("#ul4").append(li);
+            }
+            $("#btn").hide();
+        }
+
+        function LiInfo() {
+            $('li').each(function(){
+                // выведем содержимое текущего элемента в консоль
+                console.log($(this).attr('value'));
+                let len = $(this).find("li").length;
+                console.log(len);
+
+            });
+        }
+
+        // $(document).on('click', 'li', function(){
+        //     let len = $(this).find("li").length;
+        //     if (len === 0) {
+        //         $(this).parent().slideToggle(450);
+        //     }
+        // });
+
+        $(document).on('click', 'li', function(){
+            $(this).children().slideToggle(450);
+        });
+
+
+    </script>
+
+    <div id="main">
+        <h1>5.1</h1>
+        <button onclick="CreateList()" id="btn">Вывести список</button>
+    </div>
+
+    <div id="5.2">
+        <h1>5.3</h1>
+        <button onclick="LiInfo()">Вывести информацию о LI</button>
+    </div>
+
+    </body>
+</html>
+

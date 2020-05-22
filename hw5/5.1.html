@@ -10,94 +10,111 @@
 
 
     <h1>5.2</h1>
-    <button id='btn2' onclick="CheckNodes(document.documentElement)">Вывести информацию о детях(childrens) в консоль</button>
+    <button id='btn2' onclick="CheckNodes(document.getElementById('5.1'))">Вывести информацию о детях(childrens) в консоль</button>
     <script type="text/javascript">
 
 
 
         document.getElementById('btn').addEventListener('click', CreateList);
 
-          let list = [
-          {
-            text: 'Животные',
-            childs: [
+        let list = [
             {
-              text: 'Млекопитающие',
-              childs: ['Коровы', 'Ослы', 'Собаки', 'Тигры']
+                text: 'Животные',
+                children: [
+                    {
+                        text: 'Млекопитающие',
+                        children: [
+                            {
+                                text: 'Коровы',
+                                children: []
+                            },
+                            {
+                                text: 'Ослы',
+                                children: []
+                            },
+                            {
+                                text: 'Собаки',
+                                children: []
+                            },
+                            {
+                                text: 'Тигры',
+                                children: []
+                            }
+                        ]
+                    },
+                    {
+                        text: 'Другие',
+                        children: [
+                            {
+                                text: 'Змеи',
+                                children: []
+                            },
+                            {
+                                text: 'Птицы',
+                                children: []
+                            },
+                            {
+                                text: 'Ящерицы',
+                                children: []
+                            }
+                        ]
+                    }
+                ]
             },
             {
-              text: 'Другие',
-              childs: ['Змеи', 'Птицы', 'Ящерицы']
+                text: 'Рыбы',
+                children: [
+                    {
+                        text: 'Аквариумные',
+                        children: [
+                            {
+                                text: 'Гуппи',
+                                children: []
+                            },
+                            {
+                                text: 'Скалярии',
+                                children: []
+                            }
+                        ]
+                    },
+                    {
+                        text: 'Морские',
+                        children: [
+                            {
+                                text: 'Морская форель',
+                                children: []
+                            }
+                        ]
+                    }
+                ]
             }
-            ]
-          },
-          {
-            text: 'Рыбы',
-            childs: [
-            {
-              text: 'Аквариумные',
-              childs: ['Гуппи', 'Скалярии']
-            },
-            {
-              text: 'Морские',
-              childs: ['Морская форель']
-            }
-            ]
-          }
         ];
 
           function CreateList() {
-              let div = document.getElementById('5.1');
-              // Главный список
 
-              let ul = document.createElement('ul');
-              div.appendChild(ul);
-              // Первый подсписок
-              let li = document.createElement('li');
-              li.innerHTML = list[0].text;
-              ul.appendChild(li);
+            let div = document.getElementById('5.1');
+            let ul = document.createElement('ul');
+            div.appendChild(ul);
 
-              // Подсписок
-              let ul1_2 = document.createElement('ul');
-              ul1_2.setAttribute('type', "circle");
-              li.appendChild(ul1_2);
+            function createList(el, ul) {
+                let li = document.createElement('li');
+                ul.appendChild(li);
+                let text = document.createTextNode(el.text);
+                li.appendChild(text);
 
+                if (el.children) {
+                    let ul2 = li.appendChild(document.createElement('ul'));
 
-              for (let i = 0; i < list[0].childs.length; i++) {
-                  let li2 = document.createElement('li');
-                  li2.innerHTML = list[0].childs[i].text;
-                  ul1_2.appendChild(li2);
-                  let ul2_1 = document.createElement('ul');
-                  ul2_1.setAttribute('type', 'square');
-                  for (let j = 0; j < list[0].childs[i].childs.length; j++) {
-                      let li2_1 = document.createElement('li');
-                      li2_1.innerHTML = list[0].childs[i].childs[j];
-                      ul2_1.appendChild(li2_1);
-                  }
-                  li2.appendChild(ul2_1);
-              }
-              // Второй подсписок
-              let li2 = document.createElement('li');
-              li2.innerHTML = list[1].text;
-              ul.appendChild(li2);
+                    for (el of el.children) {
+                        createList(el, ul2);
+                    }
+                }
+            }
 
-              let ul2_2 = document.createElement('ul');
-              ul2_2.setAttribute('type', "circle");
-              li2.appendChild(ul2_2);
+            for (el of list) {
+                createList(el, ul);
+            }
 
-              for (let i = 0; i < list[1].childs.length; i++) {
-                  let li2 = document.createElement('li');
-                  li2.innerHTML = list[1].childs[i].text;
-                  ul2_2.appendChild(li2);
-                  let ul2_1 = document.createElement('ul');
-                  ul2_1.setAttribute('type', 'square');
-                  for (let j = 0; j < list[1].childs[i].childs.length; j++) {
-                      let li2_1 = document.createElement('li');
-                      li2_1.innerHTML = list[1].childs[i].childs[j];
-                      ul2_1.appendChild(li2_1);
-                  }
-                  li2.appendChild(ul2_1);
-              }
               document.getElementById('btn').remove();
           }
 

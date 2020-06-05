@@ -1,256 +1,444 @@
-<!doctype html>
 <html lang="ru">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1,
-     shrink-to-fit=no">
-    <link rel="stylesheet" href="../bootstrap-4.4.1-dist/css/bootstrap.css">
-    <link rel="stylesheet" href="style.css" type="text/css">
-    <link rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <title>Chess World</title>
-  </head>
+	<head>
+	<title>Canvas & Mootools</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mootools/1.6.0/mootools-core.js"></script>
+	<script type="text/javascript">
+		let canvas, ctx, figures, idTimer, elements, directions, speed = 5;
+		let N = 10;
+		let maxN = 80;
 
-  <body class="bg-dark">
+		function getRandomInt(min, max) {
+			min = Math.ceil(min);
+			max = Math.floor(max);
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
+		class TFigure {
+			constructor(pX, pY) {
+				this.posX = pX;
+				this.posY = pY;
+				this.color = 'rgb('+Math.floor(Math.random()*256)+','
+						+Math.floor(Math.random()*256)+','+Math.floor(Math.random()*256)+')';
+				this.size = getRandomInt(N, maxN);
+				this.direction = Math.floor(Math.random() * 4);
+			}
 
-    <nav class="navbar navbar-expand-lg navbar-light  bg-light">
-      <a href="#" class="navbar-brand">
-        <span clss="brand-icon"><img src="chess.png" alt="icon"
-          width="40" height="40">
-      </a>
-      <button class="navbar-toggler collapsed" type="button"
-       data-toggle="collapse" data-target="#navbarCollapse"
-       aria-controls="navbarCollapse" aria-expanded="false"
-       aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse show" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a href="index.html" class="nav-link"><i class="fas fa-home">
-            </i>Home</a>
-          </li>
-          <li class="nav-item">
-            <a href="rating.html" class="nav-link"><i class="fas fa-th-list">
-            </i>Player`s Rating</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown" id="navDropdown" role="button"
-              data-toggle="dropdown" aria-expanded="false">
-              <i class="fas fa-link"></i>Links</a>
-              <div class="dropdown-menu" aria-labelledby="navDropdown">
+		}
+		class TBall extends TFigure {
+			gradientFill(ctx) {
+				let gradient = ctx.createRadialGradient(this.posX +  this.size / 4,
+						this.posY - this.size / 6, this.size / 8, this.posX, this.posY, this.size);
+				gradient.addColorStop(0, '#fff');
+				gradient.addColorStop(0.85, this.color);
+				return gradient;
+			}
+			draw(ctx) {
+				ctx.fillStyle = this.gradientFill(ctx);
+				ctx.beginPath();
+				ctx.arc(this.posX, this.posY, this.size, 0, 2 * Math.PI, false);
+				ctx.closePath();
+				ctx.fill();
+			}
+		}
 
-                <ul class="dropright">
-                  <li><a id="nav1Dropdown" class="dropdown-item" href="#">
-                    Play Chess</a>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item"
-                          href="https://www.chess.com/play/computer"
-                          target="_blank">Chess.com</a></li>
-                        <li><div class="dropdown-divider"></div></li>
-                        <li><a class="dropdown-item"
-                          href="http://megachess.net/playchess_online"
-                           target="_blank">Megachess.net</a></li>
-                      </ul>
-                  </li>
-                  <li><div class="dropdown-divider "></div></li>
-                  <li><a id="nav2Dropdown" class="dropdown-item" href="#">
-                    Study Chess</a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item"
-                        href="https://www.ichess.net/blog/best-chess-study-techniques/"
-                         target="_blank">
-                        iChess.net</a></li>
-                      <li><div class="dropdown-divider"></div></li>
-                      <li><a class="dropdown-item" href="https://chessfox.com/chess-improvement-study-plan/"
-                        target="_blank">Chessfox.com</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-          </li>
-          <li class="nav-item">
-            <a href="svg.html" class="nav-link">
-            </i>SVG</a>
-          </li>
-          <li class="nav-item">
-            <a href="math.html" class="nav-link">
-            </i>MathML</a>
-          </li>
-          <li>
-            <div class="input-group-append">
-              <button type="button" class="btn btn-outline-secondary"
-              data-toggle="modal"
-              data-target="#exampleModal">
-                Подписаться на уведомления
-              </button>
-            </div>
-                <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">
-                        Подпишись на уведомления
-                      </h5>
-                      <button type="button" class="close" data-dismiss="modal"
-                       aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                    data-dismiss="modal">Закрыть</button>
-                    <button type="button" class="btn btn-primary">
-                      Подписаться</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
+		class TRectangle extends TFigure {
+			draw(ctx) {
+				ctx.fillStyle = this.gradientFill(ctx);
+				ctx.beginPath();
+				ctx.fillRect(this.posX, this.posY, this.size, this.size);
+				ctx.closePath();
+			}
 
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Home</li>
-      </ol>
-    </nav>
+			gradientFill(ctx) {
+				let gradient = ctx.createLinearGradient(this.posX, this.posY, this.posX + this.size, this.posY + this.size);
+				gradient.addColorStop(0, '#fff');
+				gradient.addColorStop(0.85, this.color);
+				return gradient;
+			}
+		}
 
-    <main role="main">
+		class TTriangle extends TFigure {
+			draw(ctx) {
+				ctx.fillStyle = this.gradientFill(ctx);
+				ctx.beginPath();
+				ctx.moveTo(this.posX, this.posY);
+				ctx.lineTo(this.posX + this.size / 2, this.posY + this.size);
+				ctx.lineTo(this.posX - this.size / 2, this.posY + this.size);
+				ctx.fill();
+			}
+			gradientFill(ctx) {
+				let gradient = ctx.createLinearGradient(this.posX, this.posY, this.posX + this.size, this.posY + this.size);
+				gradient.addColorStop(0, '#fff');
+				gradient.addColorStop(0.85, this.color);
+				return gradient;
+			}
+		}
 
-      <div id="carousel" class="carousel slide carousel-fade"
-        data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carousel" data-slide-to="0"
-            class="active"></li>
-          <li data-target="#carousel" data-slide-to="1"></li>
-          <li data-target="#carousel" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="news1.jpg" width="100%" height="600"
-              class="d-block w-100" alt="news1">
-            <div class="container">
-                <div class="carousel-caption text-left">
-                  <h1>ФШР перенесла все общероссийские
-                      соревнования на осень</h1>
-                    <p>Федерация шахмат России (ФШР)
-                      предварительно перенесла все
-                      общероссийские соревнования на осень в связи с
-                      эпидемиологической ситуацией в стране, сообщается на
-                      сайте организации.</p>
-                    <p><a class="btn btn-lg btn-secondary"
-                      href="https://rsport.ria.ru/20200414/1570046670.html"
-                      role="button"  target="_blank">Подробнее об этом</a></p>
-                  </div>
-              </div>
-            </div>
-          <div class="carousel-item">
-            <img src="news2.jpg" width="100%" height="600"
-             class="d-block w-100" alt="news2">
-             <div class="container">
-                 <div class="carousel-caption text-left">
-                   <h1>Карякин: пандемия — нерадостный повод,
-                       но я счастлив быть с семьей</h1>
-                     <p>Самоизоляция из-за распространения коронавируса в мире
-                       - грустный повод, но возможность наконец-то побыть с
-                       семьей, сообщил РИА Новости российский
-                       гроссмейстер Сергей Карякин.</p>
-                      <p><a class="btn btn-lg btn-secondary"
-                       href="https://rsport.ria.ru/20200414/1570042766.html"
-                       role="button"  target="_blank">Подробнее об этом</a></p>
-                   </div>
-               </div>
-          </div>
-          <div class="carousel-item">
-            <img src="news3.jpg" width="100%" height="600"
-             class="d-block w-100" alt="news3">
-            <div class="container">
-                <div class="carousel-caption text-left">
-                  <h1>Магнус Карлсен организовал онлайн-турнир
-                      с призовым фондом $250 тысяч</h1>
-                  <p>Чемпион мира по шахматам норвежец Магнус Карлсен
-                      организовал онлайн-турнир, призовой фонд которого составит
-                      250 тысяч долларов, сообщает Chess24.com.</p>
-                    <p><a class="btn btn-lg btn-secondary"
-                      href="https://rsport.ria.ru/20200402/1569494483.html"
-                      role="button"  target="_blank">Подробнее об этом</a></p>
-                  </div>
-              </div>
-          </div>
-        </div>
-        <a class="carousel-control-prev" href="#carousel"
-          role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carousel"
-          role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
+		function drawBack(ctx, col1, col2, w, h) {
+			// закрашиваем канвас градиентным фоном
+			ctx.save();
+			let g = ctx.createLinearGradient(0, 0, 0, h);
+			g.addColorStop(1, col1);
+			g.addColorStop(0, col2);
+			ctx.fillStyle = g;
+			ctx.fillRect(0, 0, w, h);
+			ctx.restore();
+		}
 
-      <div class="row task text-light align-items-center">
-        <div class="col-lg-4">
-          <img class="mr-4" src="http://chess-news.ru/sites/default/files/u5/Foto-8/v1.png"
-            alt="chess-task">
-          <h2>Что делать белым?</h2>
-          <p>Атака белых зашла в тупик. Достаточно ли у них ресурсов для
-            спасения? Найдите ход белых, укажите вариант.
-            Ещё больше подобный задач по ссылке ниже</p>
-          <p><a class="btn btn-secondary" target="_blank"
-            href="http://chess-news.ru/node/26983" role="button">
-            Обсуждение задачи »</a></p>
-        </div>
-        <div class="col-lg-4">
-          <img class="mr-4" src="https://image.winudf.com/v2/image1/NTA2ODI1OTIxMDYzNjkyOTEyMl9pY29uXzE1NTg0OTAxODhfMDk4/icon.png?w=160&fakeurl=1">
-          <h2>Не знаешь где поиграть?</h2>
-          <p>Chess.com — сайт для игры в шахматы онлайн, форум,
-            шахматная социальная сеть, а также одноимённая компания,
-            владеющая данным сайтом. </p>
-          <p><a class="btn btn-secondary"  target="_blank"
-             href="https://www.chess.com/today"
-             role="button">Chess.com »</a></p>
-        </div>
-        <div class="col-lg-4">
-          <img class="mr-4" src="https://upload.wikimedia.org/wikipedia/commons/6/6f/ChessSet.jpg">
-          <h2>Шахматы - что это?</h2>
-          <p>Ша́хматы — настольная логическая игра со специальными фигурами на
-            64-клеточной доске для двух соперников. сочетающая в себе элементы
-             искусства, науки и спорта.</p>
-          <p><a class="btn btn-secondary"  target="_blank"
-             href="https://ru.wikipedia.org/wiki/%D0%A8%D0%B0%D1%85%D0%BC%D0%B0%D1%82%D1%8B"
-             role="button">Подробнее »</a></p>
-      </div>
-    </main>
-    <hr>
-    <footer class="container">
-      <p class="float-left"><a href="#">Back to top</a></p>
-      <p class="float-right text-white">© 2020 Karim Idrisov</p>
-    </footer>
+		function randomEl() {
+			return Math.floor(Math.random() * elements.length);
+		}
+		// инициализация работы
+		function init(){
+
+			canvas = document.getElementById('canvas');
+			if (canvas.getContext){
+				ctx = canvas.getContext('2d');
+				//рисуем фон
+				drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
+				elements = [TBall, TRectangle, TTriangle];
+				figures = [];
+				for (let i = 1; i<=10;i++){
+					let item = new elements[randomEl()](10+Math.random()*(canvas.width-30),
+					10+Math.random()*(canvas.height-30));
+					item.draw(ctx);
+					figures.push(item);
+				}
+			}
+		}
+		// создаем новый шарик по щелчку мыши, добавляем его в массив шариков и рисуем его
+		function goInput(event){
+			let x = event.clientX;
+			let y = event.clientY;
+			let item = new elements[randomEl()](x - 15, y);
+			item.draw(ctx);
+			figures.push(item);
+		}
+
+		function moveFigUp(){
+			//реализация движения шариков, находящихся в массиве figures
+			drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
+			for (let i = 0; i < figures.length;i){
+				figures[i].posX = figures[i].posX + (Math.random()*4-2);
+				figures[i].posY = figures[i].posY + (Math.random()*2-speed);
+				figures[i].draw(ctx);
+				check_collusion(figures[i]);
+				figures[i].size += 1;
+				if (figures[i].size >= maxN) {
+					figures.splice(i, 1);
+					continue;
+				}
+				if ((figures[i].posX > canvas.width) || (figures[i].posX < 0) || (figures[i].posY < 0) || (figures[i].posY > canvas.height)) {
+					figures.splice(i, 1);
+				} else {
+					i++;
+				}
+				let direction = document.getElementById("directions");
+				direction = direction.getElementsByClassName("active");
+				direction = direction.item(0).childNodes[1].getAttribute('value');
+				if (direction === 'up') {
+					continue;
+				} else {
+					move();
+				}
+			}
+		}
+		function moveFigDown(){
+			//реализация движения шариков, находящихся в массиве figures
+			drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
+			for (let i = 0; i < figures.length;i){
+				figures[i].posX = figures[i].posX - (Math.random()*4-2);
+				figures[i].posY = figures[i].posY - (Math.random()*2-speed);
+				figures[i].draw(ctx);
+				check_collusion(figures[i]);
+				figures[i].size += 1;
+				if (figures[i].size >= maxN) {
+					figures.splice(i, 1);
+					continue;
+				}
+				if ((figures[i].posX > canvas.width) || (figures[i].posX < 0) || (figures[i].posY < 0) || (figures[i].posY > canvas.height)) {
+					figures.splice(i, 1);
+				} else {
+					i++;
+				}
+				let direction = document.getElementById("directions");
+				direction = direction.getElementsByClassName("active");
+				direction = direction.item(0).childNodes[1].getAttribute('value');
+				if (direction === 'down') {
+					continue;
+				} else {
+					move();
+				}
+			}
+
+		}
+		function moveFigRight(){
+			//реализация движения шариков, находящихся в массиве figures
+			drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
+			for (let i = 0; i < figures.length;i){
+				figures[i].posX = figures[i].posX - (Math.random()*2-speed);
+				figures[i].posY = figures[i].posY - (Math.random()*4-2);
+				figures[i].draw(ctx);
+				check_collusion(figures[i]);
+				figures[i].size += 1;
+				if (figures[i].size >= maxN) {
+					figures.splice(i, 1);
+					continue;
+				}
+				if ((figures[i].posX > canvas.width) || (figures[i].posX < 0) || (figures[i].posY < 0) || (figures[i].posY > canvas.height)) {
+					figures.splice(i, 1);
+				} else {
+					i++;
+				}
+				let direction = document.getElementById("directions");
+				direction = direction.getElementsByClassName("active");
+				direction = direction.item(0).childNodes[1].getAttribute('value');
+				if (direction === 'right') {
+					continue;
+				} else {
+					move();
+				}
+			}
+
+		}
+		function moveFigLeft(){
+			drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
+			for (let i = 0; i < figures.length;i){
+				figures[i].posX = figures[i].posX + (Math.random()*2-speed);
+				figures[i].posY = figures[i].posY + (Math.random()*4-2);
+				figures[i].draw(ctx);
+				check_collusion(figures[i]);
+				figures[i].size += 1;
+				if (figures[i].size >= maxN) {
+					figures.splice(i, 1);
+					continue;
+				}
+				if ((figures[i].posX > canvas.width) || (figures[i].posX < 0) || (figures[i].posY < 0) || (figures[i].posY > canvas.height)) {
+					figures.splice(i, 1);
+				} else {
+					i++;
+				}
+				let direction = document.getElementById("directions");
+				direction = direction.getElementsByClassName("active");
+				direction = direction.item(0).childNodes[1].getAttribute('value');
+				if (direction === 'left') {
+					continue;
+				} else {
+					move();
+				}
+			}
+		}
+		function moveChaos() {
+			drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
+			for (let i = 0; i < figures.length;i) {
+				figures[i].posX = figures[i].posX + getRandomInt(-speed, speed);
+				figures[i].posY = figures[i].posY + getRandomInt(-speed, speed);
+				figures[i].draw(ctx);
+				check_collusion(figures[i]);
+				figures[i].size += 1;
+				if (figures[i].size >= maxN) {
+					figures.splice(i, 1);
+					continue;
+				}
+
+				if ((figures[i].posX > canvas.width) || (figures[i].posX < 0) || (figures[i].posY < 0) || (figures[i].posY > canvas.height)) {
+					figures.splice(i, 1);
+				} else {
+					i++;
+				}
+				let direction = document.getElementById("directions");
+				direction = direction.getElementsByClassName("active");
+				direction = direction.item(0).childNodes[1].getAttribute('value');
+				if (direction === 'chaos') {
+					continue;
+				} else {
+					move();
+				}
+			}
+		}
+		function moveRandom() {
+			drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
+			for (let i = 0; i < figures.length;i){
+
+				let dir = directions[figures[i].direction];
+				if (dir === 'up') {
+					figures[i].posX = figures[i].posX + (Math.random()*4-2);
+					figures[i].posY = figures[i].posY + (Math.random()*2-speed);
+				}
+				if (dir === 'down') {
+					figures[i].posX = figures[i].posX - (Math.random()*4-2);
+					figures[i].posY = figures[i].posY - (Math.random()*2-speed);
+				}
+				if (dir === 'left') {
+					figures[i].posX = figures[i].posX + (Math.random()*2-speed);
+					figures[i].posY = figures[i].posY + (Math.random()*4-2);
+				}
+				if (dir === 'right') {
+					figures[i].posX = figures[i].posX - (Math.random()*2-speed);
+					figures[i].posY = figures[i].posY - (Math.random()*4-2);
+				}
+				figures[i].draw(ctx);
+				check_collusion(figures[i]);
+				figures[i].size += 1;
+				if (figures[i].size >= maxN) {
+					figures.splice(i, 1);
+					continue;
+				}
+				if ((figures[i].posX > canvas.width) || (figures[i].posX < 0) || (figures[i].posY < 0) || (figures[i].posY > canvas.height)) {
+					figures.splice(i, 1);
+				} else {
+					i++;
+				}
+				let direction = document.getElementById("directions");
+				direction = direction.getElementsByClassName("active");
+				direction = direction.item(0).childNodes[1].getAttribute('value');
+				if (direction === 'random') {
+					continue;
+				} else {
+					move();
+				}
+			}
+		}
+		function move() {
 
 
+				clearInterval(idTimer);
+				let direction = document.getElementById("directions");
+				direction = direction.getElementsByClassName("active");
+				direction = direction.item(0).childNodes[1].getAttribute('value');
+
+				directions = ['up', 'down', 'left', 'right'];
+
+				if (direction === 'up') {
+					idTimer = setInterval('moveFigUp();', 50);
+				}
+
+				if (direction === 'down') {
+					idTimer = setInterval('moveFigDown();', 50);
+				}
+
+				if (direction === 'right') {
+					idTimer = setInterval('moveFigRight();', 50);
+				}
+
+				if (direction === 'left') {
+					idTimer = setInterval('moveFigLeft();', 50);
+				}
+				if (direction === 'chaos') {
+					idTimer = setInterval('moveChaos()', 50);
+				}
+			if (direction === 'random') {
+				idTimer = setInterval('moveRandom()', 50);
+			}
 
 
+		}
+
+		function faster() {
+			if (speed > 10) {
+				return;
+			}
+			speed += 1;
+		}
+
+		function slower() {
+			if (speed <= 2) {
+				stop();
+				return;
+			}
+			speed -= 1;
+		}
+		function distance(x1, y1, x2, y2) {
+			return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+		}
+
+		function check_collusion(figure) {
+			for (let i = 0; i < figures.length; i++) {
+				if (figures[i] !== figure) {
+					if (figure instanceof TBall && figures[i] instanceof TBall) {
+						let d = distance(figure.posX, figure.posY, figures[i].posX, figures[i].posY);
+						if (d <= (figure.size + figures[i].size)) {
+							figures.splice(figures.indexOf(figure, 0), 1);
+							figures.splice(figures.indexOf(figures[i], 0), 1);
+							return;
+						}
+					}
+					if (figure instanceof TRectangle && figures[i] instanceof TRectangle) {
+						if (((Math.abs(figures[i].posX - figure.posX) <= figures[i].size) &&
+								(Math.abs(figures[i].posY - figure.posY) <= figures[i].size)) ||
+								((Math.abs(figures[i].posX - figure.posX) <= figure.size) &&
+										(Math.abs(figures[i].posY - figure.posY) <= figure.size))) {
+							figures.splice(figures.indexOf(figure), 1);
+							figures.splice(figures.indexOf(figures[i]), 1);
+						}
+					} else {
+						if (((Math.abs(figure.posY - figures[i].posY) <= figure.size + figures[i].size) && (figure.posY < figures[i].posY) && (figures[i].posX >= figure.posX - figures[i].size) && (figures[i].posX <= figure.posX + figure.size + figures[i].size)) ||
+								((Math.abs(figure.posX - figures[i].posX) <= figures[i].size) && (figures[i].posX < figure.posX) && (figures[i].posY >= figure.posY - figures[i].size) && (figures[i].posY <= figure.posY + figure.size + figures[i].size)) ||
+								((Math.abs(figure.posX - figures[i].posX) <= figure.size + figures[i].size) && (figure.posX < figures[i].posX) && (figures[i].posY >= figure.posY - figures[i].size) && (figures[i].posY <= figure.posY + figure.size + figures[i].size)) ||
+								((Math.abs(figure.posY - figures[i].posY) <= figures[i].size) && (figure.posY > figures[i].posY) && (figures[i].posX >= figure.posX - figures[i].size) && (figures[i].posX <= figure.posX + figure.size + figures[i].size))) {
+						}
+
+					}
+				}
+			}
+		}
+	</script>
+	<style type="text/css">
+		canvas { border: 1px solid white; }
+	</style>
+	</head>
+
+	<body onload="init();" class="bg-dark">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm main-img" >
+				<canvas id="canvas" width="600" height="400" onclick="goInput(event);">
+				</canvas>
+			</div>
+			<div class="col-sm buttons">
+				<form>
+					<div class="main-btn">
+						<input class="btn btn-success" type = "button" value = "Движение" onclick="move()">
+						<input class="btn btn-success" type = "button" value = "Стоп" onclick="clearInterval(idTimer);">
+					</div>
+					<h4 class="h_speed">Скорость</h4>
+					<div class="btn-group speed" id="speed">
+						<input class="btn btn-success" type="button"  value="Быстрее" onclick="faster();">
+						<input class="btn btn-success" type="button" value="Медленее" onclick="slower();">
+					</div>
+ 				</form>
+			</div>
+		</div>
+		<form>
+			<h3>Направление движения</h3>
+			<div class="btn-group btn-group-toggle moves" data-toggle="buttons" id="directions">
+					<label class="btn btn-secondary active">
+						<input type="radio" name="options" value="up" checked> Вверх
+					</label>
+					<label class="btn btn-secondary">
+						<input type="radio" name="options" value="left"> Влево
+					</label>
+					<label class="btn btn-secondary">
+						<input type="radio" name="options" value="down"> Вниз
+					</label>
+					<label class="btn btn-secondary">
+						<input type="radio" name="options" value="right"> Вправо
+					</label>
+					<label class="btn btn-secondary">
+						<input type="radio" name="options" value="random"> Рандомное
+					</label>
+					<label class="btn btn-secondary">
+						<input type="radio" name="options" value="chaos"> Хаос
+					</label>
+			</div>
+		</form>
+	</div>
 
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-     crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-     crossorigin="anonymous"></script>
-    <script src="../bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
-  </body>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+	</body>
 </html>

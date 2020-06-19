@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>962</width>
+    <height>798</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Films</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="horizontalLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>941</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="0">
+      <widget class="QComboBox" name="cur_genre">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="font">
+        <font>
+         <family>MS Shell Dlg 2</family>
+         <pointsize>12</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="editable">
+        <bool>false</bool>
+       </property>
+       <item>
+        <property name="text">
+         <string>Нет</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Комедия</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Драма</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Мелодрама</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Детектив</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Документальный</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Ужасы</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Музыка</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Фантастика</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Анимация</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Биография</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Боевик</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Приключения</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Война</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Семейный</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Триллер</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Фэнтези</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Вестерн</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Мистика</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Короткометражный</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Мюзикл</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Исторический</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Нуар</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QSpinBox" name="time_end">
+       <property name="minimum">
+        <number>60</number>
+       </property>
+       <property name="maximum">
+        <number>210</number>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="5" colspan="3">
+      <widget class="QLineEdit" name="lineEdit_5">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Название фильма</string>
+       </property>
+       <property name="dragEnabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="7">
+      <widget class="QPushButton" name="findFilms">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>13</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Поиск</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="8">
+      <widget class="QPushButton" name="save">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Сохранить</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLineEdit" name="lineEdit">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Жанр</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="8">
+      <widget class="QPushButton" name="add">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Добавить фильм</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QSpinBox" name="time_start">
+       <property name="maximum">
+        <number>60</number>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1" colspan="2">
+      <widget class="QLineEdit" name="lineEdit_2">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Продолжительность</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="5" colspan="2">
+      <widget class="QLineEdit" name="name">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QSpinBox" name="year">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="minimum">
+        <number>1900</number>
+       </property>
+       <property name="maximum">
+        <number>2019</number>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QLineEdit" name="lineEdit_3">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Год</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>941</width>
+      <height>701</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QTableWidget" name="table">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

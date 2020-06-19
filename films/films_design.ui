@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>972</width>
+    <height>731</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Films</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>951</width>
+      <height>681</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QTableWidget" name="tableWidget"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>381</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QComboBox" name="comboBox">
+       <property name="font">
+        <font>
+         <pointsize>13</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <item>
+        <property name="text">
+         <string>Нет</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Комедия</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Драма</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Мелодрама</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Детектив</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Документальный</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Ужасы</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Фантастика</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Анимация</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Биография</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Боевик</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Приключения</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Война</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Семейный</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Триллер</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Фэнтези</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Вестерн</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Мистика</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Короткометражный</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Мюзикл</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Исторический</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Нуар</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="font">
+        <font>
+         <pointsize>13</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Поиск</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

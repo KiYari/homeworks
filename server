@@ -1,0 +1,628 @@
+--
+-- PostgreSQL database cluster dump
+--
+
+-- Started on 2020-10-09 21:09:35
+
+SET default_transaction_read_only = off;
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+
+--
+-- Roles
+--
+
+CREATE ROLE postgres;
+ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS PASSWORD 'md583471d6b86afd8a4fd87e202e59ef07a';
+
+
+
+
+
+
+--
+-- Databases
+--
+
+--
+-- Database "template1" dump
+--
+
+\connect template1
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.14
+-- Dumped by pg_dump version 12.3
+
+-- Started on 2020-10-09 21:09:35
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+-- Completed on 2020-10-09 21:09:35
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "postgres" dump
+--
+
+\connect postgres
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.14
+-- Dumped by pg_dump version 12.3
+
+-- Started on 2020-10-09 21:09:35
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 1 (class 3079 OID 16384)
+-- Name: adminpack; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS adminpack WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2791 (class 0 OID 0)
+-- Dependencies: 1
+-- Name: EXTENSION adminpack; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION adminpack IS 'administrative functions for PostgreSQL';
+
+
+-- Completed on 2020-10-09 21:09:36
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "shop" dump
+--
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.14
+-- Dumped by pg_dump version 12.3
+
+-- Started on 2020-10-09 21:09:36
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 2862 (class 1262 OID 16461)
+-- Name: shop; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE shop WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'Russian_Russia.1251' LC_CTYPE = 'Russian_Russia.1251';
+
+
+ALTER DATABASE shop OWNER TO postgres;
+
+\connect shop
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+--
+-- TOC entry 204 (class 1259 OID 16540)
+-- Name: delivery_orders; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.delivery_orders (
+    id bigint NOT NULL,
+    count integer NOT NULL,
+    med_name character varying NOT NULL,
+    weight integer NOT NULL,
+    supplier character varying NOT NULL,
+    stock_name character varying NOT NULL,
+    order_date date NOT NULL,
+    departure_date date NOT NULL,
+    order_id integer NOT NULL
+);
+
+
+ALTER TABLE public.delivery_orders OWNER TO postgres;
+
+--
+-- TOC entry 203 (class 1259 OID 16538)
+-- Name: delivery_orders_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.delivery_orders_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.delivery_orders_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2863 (class 0 OID 0)
+-- Dependencies: 203
+-- Name: delivery_orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.delivery_orders_id_seq OWNED BY public.delivery_orders.id;
+
+
+--
+-- TOC entry 198 (class 1259 OID 16473)
+-- Name: list_of_stocks; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.list_of_stocks (
+    stock_name character varying NOT NULL,
+    id integer NOT NULL,
+    adress character varying NOT NULL
+);
+
+
+ALTER TABLE public.list_of_stocks OWNER TO postgres;
+
+--
+-- TOC entry 206 (class 1259 OID 16558)
+-- Name: medicines; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.medicines (
+    id bigint NOT NULL,
+    med_name character varying NOT NULL,
+    price numeric NOT NULL,
+    weight integer NOT NULL
+);
+
+
+ALTER TABLE public.medicines OWNER TO postgres;
+
+--
+-- TOC entry 205 (class 1259 OID 16556)
+-- Name: medicines_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.medicines_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.medicines_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2864 (class 0 OID 0)
+-- Dependencies: 205
+-- Name: medicines_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.medicines_id_seq OWNED BY public.medicines.id;
+
+
+--
+-- TOC entry 202 (class 1259 OID 16529)
+-- Name: orders; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.orders (
+    id bigint NOT NULL,
+    med_name character varying NOT NULL,
+    weight integer NOT NULL,
+    count integer NOT NULL,
+    pharmacy character varying NOT NULL,
+    stock character varying NOT NULL,
+    order_date date NOT NULL,
+    departure_date date NOT NULL,
+    order_id integer NOT NULL
+);
+
+
+ALTER TABLE public.orders OWNER TO postgres;
+
+--
+-- TOC entry 201 (class 1259 OID 16527)
+-- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.orders_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.orders_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2865 (class 0 OID 0)
+-- Dependencies: 201
+-- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.orders_id_seq OWNED BY public.orders.id;
+
+
+--
+-- TOC entry 200 (class 1259 OID 16519)
+-- Name: pharmacies; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.pharmacies (
+    name character varying NOT NULL,
+    adress character varying NOT NULL
+);
+
+
+ALTER TABLE public.pharmacies OWNER TO postgres;
+
+--
+-- TOC entry 197 (class 1259 OID 16464)
+-- Name: stock; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.stock (
+    id bigint NOT NULL,
+    count integer NOT NULL,
+    med_name character varying NOT NULL,
+    stock_id integer NOT NULL
+);
+
+
+ALTER TABLE public.stock OWNER TO postgres;
+
+--
+-- TOC entry 196 (class 1259 OID 16462)
+-- Name: stock_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.stock_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.stock_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2866 (class 0 OID 0)
+-- Dependencies: 196
+-- Name: stock_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.stock_id_seq OWNED BY public.stock.id;
+
+
+--
+-- TOC entry 199 (class 1259 OID 16500)
+-- Name: suppliers; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.suppliers (
+    name character varying NOT NULL,
+    country character varying NOT NULL
+);
+
+
+ALTER TABLE public.suppliers OWNER TO postgres;
+
+--
+-- TOC entry 2709 (class 2604 OID 16543)
+-- Name: delivery_orders id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.delivery_orders ALTER COLUMN id SET DEFAULT nextval('public.delivery_orders_id_seq'::regclass);
+
+
+--
+-- TOC entry 2710 (class 2604 OID 16561)
+-- Name: medicines id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.medicines ALTER COLUMN id SET DEFAULT nextval('public.medicines_id_seq'::regclass);
+
+
+--
+-- TOC entry 2708 (class 2604 OID 16532)
+-- Name: orders id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.orders ALTER COLUMN id SET DEFAULT nextval('public.orders_id_seq'::regclass);
+
+
+--
+-- TOC entry 2707 (class 2604 OID 16467)
+-- Name: stock id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.stock ALTER COLUMN id SET DEFAULT nextval('public.stock_id_seq'::regclass);
+
+
+--
+-- TOC entry 2854 (class 0 OID 16540)
+-- Dependencies: 204
+-- Data for Name: delivery_orders; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.delivery_orders (id, count, med_name, weight, supplier, stock_name, order_date, departure_date, order_id) FROM stdin;
+1	500	Живели Флекс Актив V80	100	Эвалар	Санкт-Петербург	2020-09-03	2020-09-14	1
+2	100	Перфектил Платинум	250	Витабиотикс	Санкт-Петербург	2020-09-03	2020-09-14	1
+3	250	Ревмафлекс	610	Фармгрупп	Москва	2020-09-10	2020-09-24	2
+4	500	Глицин-Форте	500	Эвалар	Москва	2020-09-10	2020-09-24	2
+\.
+
+
+--
+-- TOC entry 2848 (class 0 OID 16473)
+-- Dependencies: 198
+-- Data for Name: list_of_stocks; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.list_of_stocks (stock_name, id, adress) FROM stdin;
+Москва	1	г. Реутов, Транспортный переулок, д. 2а, 143960
+Владивосток	2	Приморский край, Владивосток, р-н Первомайский, мкр. Борисенко, Чукотская улица, 6В
+Екатеринбург	3	Свердловская область, Екатеринбург, р-н Октябрьский, мкр. Кольцово, проезд Горнистов, 1
+Санкт-Петербург	4	Санкт-Петербург, р-н Пушкинский, мкр. Шушары, м. Звездная, улица Поселковая, 12
+\.
+
+
+--
+-- TOC entry 2856 (class 0 OID 16558)
+-- Dependencies: 206
+-- Data for Name: medicines; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.medicines (id, med_name, price, weight) FROM stdin;
+1	Глицин-Форте	179	300
+2	Глицин-Форте	265	500
+3	Расторопши экстракт	121	250
+4	Расторопши экстракт	185	400
+5	Ревмафлекс	637	610
+6	Урисан	678	550
+7	Фемо-Клим	460	505
+8	Фитогипноз	520	215
+9	Цинарикс	275	400
+10	Железо Плюс	203	150
+11	Живели Флекс Актив V80	400	100
+12	Перфектил Платинум	1701	250
+\.
+
+
+--
+-- TOC entry 2852 (class 0 OID 16529)
+-- Dependencies: 202
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.orders (id, med_name, weight, count, pharmacy, stock, order_date, departure_date, order_id) FROM stdin;
+1	Урисан	550	50	Главная аптека	Москва	2020-09-01	2020-09-15	1
+2	Железо Плюс	150	50	Главная аптека	Москва	2020-09-01	2020-09-15	1
+3	Урисан	550	70	Монастырёв.рф	Владивосток	2020-09-04	2020-09-20	2
+4	Перфектил Платинум	250	10	Монастырёв.рф	Владивосток	2020-09-04	2020-09-20	2
+5	Расторопши экстракт	400	100	Государственная аптека	Екатеринбург	2020-09-10	2020-09-24	3
+6	Фемо-Клим	505	10	Государственная аптека	Екатеринбург	2020-09-10	2020-09-24	3
+7	Урисан	550	150	Государственная аптека	Екатеринбург	2020-09-10	2020-09-24	3
+8	Перфектил Платинум	250	100	Государственная аптека	Екатеринбург	2020-09-10	2020-09-24	3
+\.
+
+
+--
+-- TOC entry 2850 (class 0 OID 16519)
+-- Dependencies: 200
+-- Data for Name: pharmacies; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.pharmacies (name, adress) FROM stdin;
+Аптеки Столицы Аптека № 5	Петровка ул., 19 строение 1, Москва, 127051
+Главная аптека	пр-т Мира, д. 54, стр. 1, Москва, 129110
+Социальная аптека	пр-т 100-летия Владивостока, 38, Владивосток, Приморский край, 690048
+Монастырёв.рф	пр-т. 100-летия Владивостока, 20, Владивосток, Приморский край, 690062
+Петербургские аптеки	Моховая ул., 22, лит. А, Санкт-Петербург, 191028
+Аптека № 22	Суворовский пр., 48, Санкт-Петербург, 191015
+Дешевая аптека	просп. Ленина, 41, Екатеринбург, Свердловская обл., 620075
+Государственная аптека	ул. Академика Шварца, 4, Екатеринбург, Свердловская обл., 620089
+\.
+
+
+--
+-- TOC entry 2847 (class 0 OID 16464)
+-- Dependencies: 197
+-- Data for Name: stock; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.stock (id, count, med_name, stock_id) FROM stdin;
+1	1000	Глицин-Форте	1
+2	5000	Расторопши экстракт	1
+3	100	Ревмафлекс	1
+4	250	Урисан	1
+5	700	Фемо-Клим	2
+6	200	Фитогипноз	2
+7	500	Цинарикс	3
+8	100	Урисан	3
+9	3000	Железо Плюс	3
+10	0	Живели Флекс Актив V80	4
+11	30	Перфектил Платинум	4
+12	1500	Глицин-Форте	4
+\.
+
+
+--
+-- TOC entry 2849 (class 0 OID 16500)
+-- Dependencies: 199
+-- Data for Name: suppliers; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.suppliers (name, country) FROM stdin;
+Эвалар	Россия
+Витабиотикс	Великобритания
+Фармгрупп	Россия
+Крка	Словения
+\.
+
+
+--
+-- TOC entry 2867 (class 0 OID 0)
+-- Dependencies: 203
+-- Name: delivery_orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.delivery_orders_id_seq', 1, false);
+
+
+--
+-- TOC entry 2868 (class 0 OID 0)
+-- Dependencies: 205
+-- Name: medicines_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.medicines_id_seq', 1, false);
+
+
+--
+-- TOC entry 2869 (class 0 OID 0)
+-- Dependencies: 201
+-- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.orders_id_seq', 1, false);
+
+
+--
+-- TOC entry 2870 (class 0 OID 0)
+-- Dependencies: 196
+-- Name: stock_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.stock_id_seq', 1, false);
+
+
+--
+-- TOC entry 2722 (class 2606 OID 16548)
+-- Name: delivery_orders delivery_orders_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.delivery_orders
+    ADD CONSTRAINT delivery_orders_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2714 (class 2606 OID 16480)
+-- Name: list_of_stocks list_of_stocks_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.list_of_stocks
+    ADD CONSTRAINT list_of_stocks_pkey PRIMARY KEY (stock_name);
+
+
+--
+-- TOC entry 2724 (class 2606 OID 16566)
+-- Name: medicines medicines_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.medicines
+    ADD CONSTRAINT medicines_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2720 (class 2606 OID 16537)
+-- Name: orders orders_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2718 (class 2606 OID 16526)
+-- Name: pharmacies pharmacies_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pharmacies
+    ADD CONSTRAINT pharmacies_pkey PRIMARY KEY (name);
+
+
+--
+-- TOC entry 2712 (class 2606 OID 16472)
+-- Name: stock stock_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.stock
+    ADD CONSTRAINT stock_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2716 (class 2606 OID 16507)
+-- Name: suppliers suppliers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.suppliers
+    ADD CONSTRAINT suppliers_pkey PRIMARY KEY (name);
+
+
+-- Completed on 2020-10-09 21:09:36
+
+--
+-- PostgreSQL database dump complete
+--
+
+-- Completed on 2020-10-09 21:09:36
+
+--
+-- PostgreSQL database cluster dump complete
+--
+
